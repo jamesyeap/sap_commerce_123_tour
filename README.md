@@ -188,10 +188,42 @@ Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/daos/i
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/web/src/<EXTENSION_NAME>/controller`
 * naming format: `*Controller.java`
 
+Important details of Controller classes:
+```java
+@Controller
+public class ExampleController {
+	// returns this page when URL contains "www.example.com/pageA"
+	@RequestMapping(value = "/pageA")
+	public String functionA(final Model model) {
+		// maps this value to "{$attrOne}" in "pageA.jsp"
+		final Integer attrOne = 1;
+		model.addAttribute("attrOne", attrOne);
+
+		// return "pageA.jsp"
+		return "pageA";
+	}
+}
+```
+
 ## JSP
 ### Writing JSP
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/web/webroot/WEB-INF/views`
 * naming format: `*.jsp`
+
+Important details of JSP files:
+```jsp
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!doctype html>
+
+<html>
+	<title>Example Page</title>
+
+	<body>
+		<h1>Example of attribute mapping</h1>
+		<p>Value of attrOne (as defined in ExampleController): ${attrOne}</p>
+	</body>
+</html>
+```
 
 ### Viewing changes made to JSP files
 Note: you don't have to restart the server if you create new or modify existing jsp pages. This can be very helpful in speeding up the development of your front end.
