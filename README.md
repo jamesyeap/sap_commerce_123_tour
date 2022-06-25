@@ -168,9 +168,6 @@ ant clean all
 # run unit tests for a specific package
 ant unittests -Dtestclasses.packages="<PACKAGE_NAME>.*"
 
-# run both unit and integration tests for a specific package
-ant alltests -Dtestclasses.packages="<PACKAGE_NAME>.*"
-
 # view test results in this file:
 # "$HYBRIS_HOME_DIR/hybris/log/junit/index.html"
 ```
