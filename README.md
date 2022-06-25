@@ -192,3 +192,6 @@ Specified in `hybris/bin/custom/<EXTENSION_NAME>/web/src/<EXTENSION_NAME>/contro
 ### Writing JSP
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/web/webroot/WEB-INF/views`
 * naming format: `*.jsp`
+
+### Viewing changes made to JSP files
+Note: you don't have to restart the server if you create new or modify existing jsp pages. This can be very helpful in speeding up the development of your front end.
