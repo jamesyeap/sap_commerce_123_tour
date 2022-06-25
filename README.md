@@ -227,3 +227,29 @@ Important details of JSP files:
 
 ### Viewing changes made to JSP files
 Note: you don't have to restart the server if you create new or modify existing jsp pages. This can be very helpful in speeding up the development of your front end.
+
+# Dynamic Attributes
+* Dynamic attributes enable you to add attributes to your model, and to create custom logic for them, without touching the model class itself.
+* They provide a way to generate new data, and access it without calling a separate service to do so.
+	* Dynamic attributes are transient data that is not persisted to the database.
+
+## Writing Dynamic attributes
+The implementation of this new dynamic attribute has some key features:
+* The persistence type is set to dynamic
+* The persistence attributeHandler points to a bean that must handle the DynamicAttributeHandler interface
+* The write attribute is set to false, and therefore the attribute is read-only
+
+### Declaring attribute
+Add attribute in `<EXTENSION_NAME>-items.xml`:
+```xml
+<attribute qualifier="daysUntil" type="java.lang.Long">
+	<persistence type="dynamic" attributeHandler="concertDaysUntilAttributeHandler" />
+    <modifiers read="true" write="false" />
+</attribute>
+```
+
+### Defining attribute handler
+1. Write handler in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/attributehandlers`
+* naming format: `*AttributeHandler.java`
+2. Register handler in `*-spring.xml`
+* `<bean id="*AttributeHandler" class="<EXTENSION_NAME>.attributehandlers.*AttributeHandler"/>``
