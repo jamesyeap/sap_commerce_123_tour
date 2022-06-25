@@ -94,7 +94,24 @@ Official Docs: [Service Layer](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81
 	* naming format: `Default*DAO.java`
 
 # Integration Tests (Service Layer)
+```bash
+# in working directory "$HYBRIS_HOME_DIR/hybris/bin/platform"
+
+# compile integration test classes
+ant clean all
+
+# initialize test tenant
+ant yunitinit
+
+# run integration tests for a specific package
+ant integrationtests -Dtestclasses.packages="<PACKAGE_NAME>.*"
+
+# view test results in this file:
+# "$HYBRIS_HOME_DIR/hybris/log/junit/index.html"
+```
+
+## For Service Layer
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/service/impl`
 
-# Integration Tests (DAO)
+## For DAO
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/daos/impl`
