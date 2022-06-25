@@ -93,6 +93,9 @@ Official Docs: [Service Layer](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81
 * Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/daos/impl`
 	* naming format: `Default*DAO.java`
 
+# Facade Layer
+
+
 # Integration Tests
 ```bash
 # in working directory "$HYBRIS_HOME_DIR/hybris/bin/platform"
