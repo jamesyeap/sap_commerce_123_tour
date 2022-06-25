@@ -56,10 +56,16 @@ pkill -f "DatabaseManager"
 3. Paste the Impex statements into the Import content text box
 4. Click on Import Content
 
-## Through Impex Files
-Stored in `hybris/bin/custom/<EXTENSION_NAME>/resources/impex`
+## By Convention
+Store impex files in `hybris/bin/custom/<EXTENSION_NAME>/resources/impex`
 
-2 types of impex files:
-* always imported when the platform is initialized with the extension: `essentialdata*.impex`
-* only imported when specified explicitly in the HAC during initialization: `projectdata*.impex`
+### Naming convention:
+To ensure that impex files are loaded during SAP Commerce initialization or update phase, the impex files have to follow a specific naming convention:
+* 2 types of impex files:
+	* always imported when the platform is initialized with the extension: `essentialdata*.impex`
+	* only imported when explicitly specified in the HAC during initialization: `projectdata*.impex`
 
+## By Code
+Ensure that impex files DO NOT follow the naming conventions specified in "Naming convention" section.
+
+[Hooks for Initialization and Update Process](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/8bcb3edb86691014af58b7162c06e1d5.html?locale=en-US&version=2105)
