@@ -2,4 +2,7 @@
 ```bash
 # in working directory "$HYBRIS_HOME_DIR/hybris123"
 java -jar target/hybris123.war
+
+# open the console
+http://localhost:8080
 ```
