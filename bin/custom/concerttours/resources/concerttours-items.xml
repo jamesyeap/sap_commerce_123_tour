@@ -126,6 +126,7 @@
 
 				<!--
 					Adds a dynamic attribute that holds values that is NOT persisted in the database
+						- the value of the dynamic attribute is computed by a specified AttributeHandler
 				-->
 				<attribute qualifier="daysUntil" type="java.lang.Long">
 					<persistence type="dynamic" attributeHandler="concertDaysUntilAttributeHandler" />
