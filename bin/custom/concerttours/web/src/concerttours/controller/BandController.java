@@ -24,6 +24,8 @@ public class BandController
     {
         final List<BandData> bands = bandFacade.getBands();
         model.addAttribute("bands", bands);
+
+        // return BandList.jsp
         return "BandList";
     }
     @RequestMapping(value = "/bands/{bandId}")
@@ -33,6 +35,8 @@ public class BandController
         final String decodedBandId = URLDecoder.decode(bandId, "UTF-8");
         final BandData band = bandFacade.getBand(decodedBandId);
         model.addAttribute("band", band);
+
+        // return BandDetails.jsp
         return "BandDetails";
     }
     @Autowired

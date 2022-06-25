@@ -25,6 +25,8 @@ public class TourController
         final String decodedTourId = URLDecoder.decode(tourId, "UTF-8");
         final TourData tour = tourFacade.getTourDetails(decodedTourId);
         model.addAttribute("tour", tour);
+
+        // return TourDetails.jsp
         return "TourDetails";
     }
     @Autowired
