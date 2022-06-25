@@ -93,9 +93,12 @@ Official Docs: [Service Layer](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81
 * Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/daos/impl`
 	* naming format: `Default*DAO.java`
 
-# Integration Tests (Service Layer)
+# Integration Tests
 ```bash
 # in working directory "$HYBRIS_HOME_DIR/hybris/bin/platform"
+
+# close SAP Commerce instance
+./hybrisserver stop
 
 # compile integration test classes
 ant clean all
@@ -110,8 +113,36 @@ ant integrationtests -Dtestclasses.packages="<PACKAGE_NAME>.*"
 # "$HYBRIS_HOME_DIR/hybris/log/junit/index.html"
 ```
 
-## For Service Layer
+## Integration Tests for Service Layer
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/service/impl`
+* naming format: `Default*ServiceIntegrationTest.java`
 
-## For DAO
+## Integration Tests for DAO
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/daos/impl`
+* naming format: `Default*DAOIntegrationTest.java`
+
+# Unit Tests
+```bash
+# in working directory "$HYBRIS_HOME_DIR/hybris/bin/platform"
+
+# close SAP Commerce instance
+./hybrisserver stop
+
+# compile integration test classes
+ant clean all
+
+# ℹ️ NO NEED to initialize test tenant
+
+# run integration tests for a specific package
+ant unittests -Dtestclasses.packages="<PACKAGE_NAME>.*"
+
+# view test results in this file:
+# "$HYBRIS_HOME_DIR/hybris/log/junit/index.html"
+```
+## Unit Tests for Service Layer
+Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/service/impl`
+* naming format: `Default*ServiceUnitTest.java`
+
+## Unit Tests for DAO
+Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/daos/impl`
+* naming format: `Default*DAOUnitTest.java`
