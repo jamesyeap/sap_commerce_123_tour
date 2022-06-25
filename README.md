@@ -68,7 +68,7 @@ To ensure that impex files are loaded during SAP Commerce initialization or upda
 ## By Code
 * Ensure that impex files DO NOT follow the naming conventions specified in "Naming convention" section.
 * Add ServiceLayer class to `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/setup/`
-	* name it: `<EXTENSION_NAME>CustomSetup.java`
+	* naming format: `<EXTENSION_NAME>CustomSetup.java`
 		* for consistency only; naming of file has no impact on functionality
 * Register this class as a Spring bean in `hybris/bin/custom/<EXTENSION_NAME>/resources/<EXTENSION_NAME>-spring.xml`
 
@@ -78,3 +78,17 @@ Use the `@SystemSetup` annotation in any ServiceLayer class to hook ServiceLayer
 * Methods are called in an order that respects the extension build order.
 	* You can define when a method should be executed, and pass context information to it.
 * Official Docs: [Hooks for Initialization and Update Process](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/8bcb3edb86691014af58b7162c06e1d5.html?locale=en-US&version=2105)
+
+# Service Layer
+* Interfaces specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/service`
+	* naming format: `*Service.java` 
+* Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/service/impl`
+	* naming format: `Default*Service.java`
+
+Official Docs: [Service Layer](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/df85e82ae7dd4956b28c266222fcc693.html?locale=en-US)
+
+# Data Access Objects (DAO)
+* Interfaces specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/daos`
+	* naming format: `*DAO.java`
+* Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/daos/impl`
+	* naming format: `Default*DAO.java`
