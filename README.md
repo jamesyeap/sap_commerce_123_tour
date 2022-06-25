@@ -37,7 +37,7 @@ ant updatesystem
 3. Search for the table name.
 
 #### Using the default hsqldb DatabaseManager
-⚠️ NOTE: This didn't work for me.
+⚠️ NOTE: This didn't work for me as the GUI's navigation list didn't work.
 
 ```bash
 # in working directory "$HYBRIS_HOME_DIR/hybris"
@@ -48,3 +48,18 @@ java -cp ./bin/platform/lib/dbdriver/hsqldb*.jar org.hsqldb.util.DatabaseManager
 # closing database manager
 pkill -f "DatabaseManager"
 ```
+
+# Importing Data
+## Through HAC
+1. Start the SAP Commerce server
+2. Go to Console > ImpEx Import
+3. Paste the Impex statements into the Import content text box
+4. Click on Import Content
+
+## Through Impex Files
+Stored in `hybris/bin/custom/<EXTENSION_NAME>/resources/impex`
+
+2 types of impex files:
+* always imported when the platform is initialized with the extension: `essentialdata*.impex`
+* only imported when specified explicitly in the HAC during initialization: `projectdata*.impex`
+
