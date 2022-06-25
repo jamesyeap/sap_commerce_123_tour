@@ -92,3 +92,9 @@ Official Docs: [Service Layer](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81
 	* naming format: `*DAO.java`
 * Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/daos/impl`
 	* naming format: `Default*DAO.java`
+
+# Integration Tests (Service Layer)
+Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/service/impl`
+
+# Integration Tests (DAO)
+Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/daos/impl`
