@@ -11,7 +11,11 @@ Tour Details for ${tour.tourName}
 <table>
     <tr><th>Venue</th><th></th><th>Date</th></tr>
     <c:forEach var="concert" items="${tour.concerts}">
-        <tr><td>${concert.venue}</td><td>${concert.type}</td><td><fmt:formatDate pattern="dd MMM yyyy" value="${concert.date}" /></td></tr>
+        <tr>
+            <td>${concert.venue}</td>
+            <td>${concert.type}</td>
+            <td><fmt:formatDate pattern="dd MMM yyyy" value="${concert.date}" /></td>
+            <td>${concert.countDown}</td></tr>
     </c:forEach>
 </table>
 <a href="../bands">Back to Band List</a>
