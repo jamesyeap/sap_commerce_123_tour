@@ -80,21 +80,47 @@ Use the `@SystemSetup` annotation in any ServiceLayer class to hook ServiceLayer
 * Official Docs: [Hooks for Initialization and Update Process](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/8bcb3edb86691014af58b7162c06e1d5.html?locale=en-US&version=2105)
 
 # Service Layer
+## Writing Service classes
 * Interfaces specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/service`
 	* naming format: `*Service.java` 
 * Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/service/impl`
 	* naming format: `Default*Service.java`
+* Register implementations as Spring beans in `<EXTENSION_NAME>-spring.xml`
 
 Official Docs: [Service Layer](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/df85e82ae7dd4956b28c266222fcc693.html?locale=en-US)
 
 # Data Access Objects (DAO)
+## Writing DAO classes
 * Interfaces specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/daos`
 	* naming format: `*DAO.java`
 * Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/daos/impl`
 	* naming format: `Default*DAO.java`
 
-# Facade Layer
+# Data Transfer Objects (DTO)
+SAP Commerce generates Java model classes that represent the different types of item that are stored in the database. These model classes are what you pass as arguments to the different Java services in the SAP Commerce service layer. Nevertheless, there are occasions when the model classes become unwieldy:
+* When you need a simpler or more convenient format for some of the data to display in JSPs
+* When you need a serializable set of objects to send to another system
+* When you want to prevent client code from modifying attributes in a model class object directly
 
+In these cases, you need a simpler representation of the data in the model classes. This representation is the purpose of the Data Transfer Object.
+
+## Generating DTO classes
+Unlike DAO, DTO are not written manually. Instead, do the following:
+1. Specify beans in `hybris/bin/custom/<EXTENSION_NAME>/resources/<EXTENSION_NAME>-beans.xml`
+2. Run `ant clean all` to generate DTO classes
+3. DTO classes are generated in `hybris/bin/platform/bootstrap/gensrc`
+
+# Facade Layer
+If there is a common sequence of method calls that a client must make against a service object, it makes sense to combine the sequence into one call. You make these simplified calls with a facade object.
+
+Facade classes help simplify the calls made to your service classes. They use simpler plain old java objects (POJOs) as argument and result objects, instead of SAP Commerce model classes. In this step, you create a new BandFacade class.
+
+## Writing Facade classes
+* Interfaces specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/facades`
+	* naming format: `*Facade.java` 
+* Implementations specified in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/facades/impl`
+	* naming format: `Default*Facade.java`
+* Register implementations as Spring beans in `<EXTENSION_NAME>-spring.xml`
 
 # Integration Tests
 ```bash
@@ -111,6 +137,9 @@ ant yunitinit
 
 # run integration tests for a specific package
 ant integrationtests -Dtestclasses.packages="<PACKAGE_NAME>.*"
+
+# run both unit and integration tests for a specific package
+ant alltests -Dtestclasses.packages="<PACKAGE_NAME>.*"
 
 # view test results in this file:
 # "$HYBRIS_HOME_DIR/hybris/log/junit/index.html"
@@ -136,8 +165,11 @@ ant clean all
 
 # ℹ️ NO NEED to initialize test tenant
 
-# run integration tests for a specific package
+# run unit tests for a specific package
 ant unittests -Dtestclasses.packages="<PACKAGE_NAME>.*"
+
+# run both unit and integration tests for a specific package
+ant alltests -Dtestclasses.packages="<PACKAGE_NAME>.*"
 
 # view test results in this file:
 # "$HYBRIS_HOME_DIR/hybris/log/junit/index.html"
