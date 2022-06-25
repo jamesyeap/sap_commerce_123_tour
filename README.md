@@ -264,3 +264,15 @@ ant clean all
 # add the dynamic attribute to the type system
 ant updatesystem
 ```
+
+# Events
+The Event System is a framework provided by the ServiceLayer that allows you to send and receive events within SAP Commerce.
+
+## Predefined Events
+The platform defines and publishes events for a number of predefined types of event. These include the AfterItemCreationEvent type, items of which are published after any new data item is saved to the database. To process these AfterItemCreationEvent events, you provide a listener class and register it with the event framework.
+
+## User-defined Events
+Also, you can set up components of your extension to publish events that are then received by registered listeners.
+
+# Listeners
+Listeners are objects that are notified of events and perform business logic depending on the event that occured. Events can be published either locally or across a cluster of nodes. You can register new listeners as Spring beans in your Spring configuration XML file.
