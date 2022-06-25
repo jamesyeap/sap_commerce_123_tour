@@ -66,6 +66,15 @@ To ensure that impex files are loaded during SAP Commerce initialization or upda
 	* only imported when explicitly specified in the HAC during initialization: `projectdata*.impex`
 
 ## By Code
-Ensure that impex files DO NOT follow the naming conventions specified in "Naming convention" section.
+* Ensure that impex files DO NOT follow the naming conventions specified in "Naming convention" section.
+* Add ServiceLayer class to `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/setup/`
+	* name it: `<EXTENSION_NAME>CustomSetup.java`
+		* for consistency only; naming of file has no impact on functionality
+* Register this class as a Spring bean in `hybris/bin/custom/<EXTENSION_NAME>/resources/<EXTENSION_NAME>-spring.xml`
 
-[Hooks for Initialization and Update Process](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/8bcb3edb86691014af58b7162c06e1d5.html?locale=en-US&version=2105)
+### Mechanism
+Use the `@SystemSetup` annotation in any ServiceLayer class to hook ServiceLayer code into the SAP Commerce initialization and update life-cycle events. In this way, you can provide a means for creating essential and project data for any extension.
+* By using annotations, no interfaces have to be implemented or parent classes extended, keeping the classes loosely coupled.
+* Methods are called in an order that respects the extension build order.
+	* You can define when a method should be executed, and pass context information to it.
+* Official Docs: [Hooks for Initialization and Update Process](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/8bcb3edb86691014af58b7162c06e1d5.html?locale=en-US&version=2105)
