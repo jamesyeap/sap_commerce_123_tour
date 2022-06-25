@@ -181,3 +181,14 @@ Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/servic
 ## Unit Tests for DAO
 Specified in `hybris/bin/custom/<EXTENSION_NAME>/testsrc/<EXTENSION_NAME>/daos/impl`
 * naming format: `Default*DAOUnitTest.java`
+
+# Front End
+## Controllers
+### Writing Controller classes
+Specified in `hybris/bin/custom/<EXTENSION_NAME>/web/src/<EXTENSION_NAME>/controller`
+* naming format: `*Controller.java`
+
+## JSP
+### Writing JSP
+Specified in `hybris/bin/custom/<EXTENSION_NAME>/web/webroot/WEB-INF/views`
+* naming format: `*.jsp`
