@@ -123,6 +123,10 @@
 					<description>type of concert (indoors or open air)</description>
 					<persistence type="property" />
 				</attribute>
+
+				<!--
+					Adds a dynamic attribute that holds values that is NOT persisted in the database
+				-->
 				<attribute qualifier="daysUntil" type="java.lang.Long">
 					<persistence type="dynamic" attributeHandler="concertDaysUntilAttributeHandler" />
 					<modifiers read="true" write="false" />
