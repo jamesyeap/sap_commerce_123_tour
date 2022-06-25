@@ -252,4 +252,18 @@ Add attribute in `<EXTENSION_NAME>-items.xml`:
 1. Write handler in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/attributehandlers`
 * naming format: `*AttributeHandler.java`
 2. Register handler in `*-spring.xml`
-* `<bean id="*AttributeHandler" class="<EXTENSION_NAME>.attributehandlers.*AttributeHandler"/>``
+* `<bean id="*AttributeHandler" class="<EXTENSION_NAME>.attributehandlers.*AttributeHandler"/>`
+
+## Updating SAP Commerce
+```bash
+# in working directory "$HYBRIS_HOME_DIR/hybris/bin/platform"
+
+# stop the SAP Commerce server
+./hybrisserver stop
+
+# compile the attribute handler class
+ant clean all
+
+# add the dynamic attribute to the type system
+ant updatesystem
+```
