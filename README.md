@@ -769,4 +769,11 @@ type.Band.albumSales.description=Anzahl der verkauften Alben
 ## Validation constraints with Backoffice
 
 ## Validation constraints with ImpEx
+In `hybris/bin/custom/<EXTENSION_NAME>/resources/impex`, create a file named `essentialdata-constraint.impex`
+* which contains statements to insert constraints into the "MinConstraint" table
 
+### Example
+```
+INSERT_UPDATE MinConstraint;id[unique=true];severity(code,itemtype(code));active;annotation;descriptor(enclosingType(code),qualifier);message[lang=de];message[lang=en];value
+;AlbumSalesMustNotBeNegative;ERROR:Severity;true;javax.validation.constraints.Min;Band:albumSales;Albumverkäufe dürfen nicht negativ sein;Album sales must not be negative;0
+```
