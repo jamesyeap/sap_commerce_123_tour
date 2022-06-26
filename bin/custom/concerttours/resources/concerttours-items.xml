@@ -89,7 +89,7 @@
 					<description>short unique code of band</description>
 					<persistence type="property" />
 				</attribute>
-				<attribute qualifier="name" type="java.lang.String">
+				<attribute qualifier="name" type="localized:java.lang.String">
 					<description>name of band</description>
 					<persistence type="property" />
 				</attribute>
@@ -97,7 +97,7 @@
 					<description>history of band</description>
 					<persistence type="property" />
 				</attribute>
-				<attribute qualifier="albumSales" type="java.lang.Long">
+				<attribute qualifier="albumSales" type="localized:java.lang.Long">
 					<description>official global album sales</description>
 					<persistence type="property" />
 				</attribute>
