@@ -713,9 +713,52 @@ In `*-items.xml` file,
   <persistence type="property" />
 </attribute>
 ```
-## Localize Attribute Values with ImpEx
+## Localizing Attribute Values with ImpEx
 ```
 # Insert Products
 INSERT_UPDATE Product;code[unique=true];name;band(code);hashtag[lang=en];hashtag[lang=de];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
 ;201701;The Grand Little Tour;A001;GrandLittle;GrossWenig;;x;y;pieces;;Concert
+```
+
+## Localizing Attribute Values in HAC
+1. In `/hybris/bin/custom/<EXTENSION_NAME>/resources/localization`, for each locale, add a file named `<EXTENSION_NAME>-locales_<LOCALE_ISOCODE>.properties`
+* each entry is in the form `key=localized value`
+```
+# ===== ENTRY FORMATS =====
+
+# type.<code of type>.name=XY
+# type.<code of type>.<qualifier of attribute>.name=XY
+# type.<code of type>.description=XY
+# type.<code of type>.<qualifier of attribute>.description=XY
+```
+2. Go to HAC > Platform > Update
+3. Select only the **"Localize types"** option
+4. Click on the **"Update"** button
+
+### Examples
+* in `concerttours/resources/localization/concerttours-locales_en.properties`:
+```
+type.Band.name=Band
+type.Band.description=a group or band of musicians of singers
+type.Band.code.name=code
+type.Band.code.description=unique short id for the band
+type.Band.name.name=name
+type.Band.name.description=name of the band
+type.Band.history.name=history
+type.Band.history.description=short story about the band
+type.Band.albumSales.name=album sales
+type.Band.albumSales.description=number of albums sold
+```
+* in `concerttours/resources/localization/concerttours-locales_de.properties`:
+```
+type.Band.name=Bande
+type.Band.description=Eine Gruppe oder eine Band von Musikern oder Sängern
+type.Band.code.name=code
+type.Band.code.description=Einzigartige kurze ID für die Bande
+type.Band.name.name=Name
+type.Band.name.description=Name der Bande
+type.Band.history.name=Geschichte
+type.Band.history.description=Kurzgeschichte über die Bande
+type.Band.albumSales.name=Albumverkauf
+type.Band.albumSales.description=Anzahl der verkauften Alben
 ```
