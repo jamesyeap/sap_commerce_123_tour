@@ -704,4 +704,18 @@ When the SAP build system encounters the localized keyword, instead of a single 
 
 Impex has a built-in syntax for specifying values for localized values.
 
+## Enabling localization for attributes
+In `*-items.xml` file,
+```xml
+<!-- Append "localized:" to the type specification -->
+<attribute qualifier="hashtag" type="localized:java.lang.String">
+  <description>hashtag of concert tour for social media</description>
+  <persistence type="property" />
+</attribute>
+```
 ## Localize Attribute Values with ImpEx
+```
+# Insert Products
+INSERT_UPDATE Product;code[unique=true];name;band(code);hashtag[lang=en];hashtag[lang=de];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+;201701;The Grand Little Tour;A001;GrandLittle;GrossWenig;;x;y;pieces;;Concert
+```
