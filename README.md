@@ -856,3 +856,8 @@ ant build;
 
 ant initialize;
 ```
+
+6. Add the new Custom Constraint through any of the following methods
+* in `items.xml`
+* in Backoffice
+* in an ImpEx script
