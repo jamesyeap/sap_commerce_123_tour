@@ -777,3 +777,82 @@ In `hybris/bin/custom/<EXTENSION_NAME>/resources/impex`, create a file named `es
 INSERT_UPDATE MinConstraint;id[unique=true];severity(code,itemtype(code));active;annotation;descriptor(enclosingType(code),qualifier);message[lang=de];message[lang=en];value
 ;AlbumSalesMustNotBeNegative;ERROR:Severity;true;javax.validation.constraints.Min;Band:albumSales;Albumverkäufe dürfen nicht negativ sein;Album sales must not be negative;0
 ```
+
+# Custom Validation Constraints
+
+## Writing Validation Constraints (for Attributes)
+extends `AttributeConstraint`
+
+1. Add constraint item type to `items.xml` file
+```xml
+<itemtype code="NotLoremIpsumConstraint" extends="AttributeConstraint"
+    autocreate="true" generate="true">
+    <description>Custom constraint which checks for Lorem Ipsum text.</description>
+    <attributes>
+        <attribute qualifier="annotation" type="java.lang.Class"
+            redeclare="true">
+            <modifiers write="false" initial="true" optional="false" />
+            <defaultvalue>
+                concerttours.constraints.NotLoremIpsum.class
+            </defaultvalue>
+        </attribute>
+    </attributes>
+</itemtype>
+```
+
+2. Add annotation interface to `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/constraints`
+```java
+package concerttours.constraints;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import javax.validation.Constraint;
+import javax.validation.Payload;
+ 
+@Target(
+{ FIELD })
+@Retention(RUNTIME)
+@Constraint(validatedBy = NotLoremIpsumValidator.class)
+@Documented
+public @interface NotLoremIpsum
+{
+    String message() default "{concerttours.constraints.NotLoremIpsum.message}";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
+}
+```
+
+3. Add validator class to `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/constraints`
+```java
+package concerttours.constraints;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+ 
+public class NotLoremIpsumValidator implements ConstraintValidator<NotLoremIpsum, String>
+{
+    @Override
+    public void initialize(final NotLoremIpsum constraintAnnotation)
+    {
+        // empty
+    }
+    @Override
+    public boolean isValid(final String value, final ConstraintValidatorContext context)
+    {
+        return value != null && !value.isEmpty() && !value.toLowerCase().startsWith("lorem ipsum");
+    }
+}
+```
+
+4. Specify the type that the constraint is checking for (eg string, number, date etc) in `hybris/config/local.properties`
+```
+validation.constraints.attribute.mapping.concerttours.constraints.NotLoremIpsum=strings
+```
+
+5. Update changes
+```bash
+ant build;
+
+ant initialize;
+```
