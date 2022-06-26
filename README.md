@@ -485,9 +485,26 @@ public class BandAlbumSalesInterceptor implements ValidateInterceptor, PrepareIn
 </bean>
 ```
 
-# Jobs
+# CronJobs
+A cron job consists of the job class containing the business logic, and a trigger to start the job at regular intervals.
 
-## Writing Job classes
+The first step in setting up a new cron job is to notify SAP Commerce of your new class by creating your essential data.
+* During the creation of essential data, a ServicelayerJob item is created for every Spring definition that has a class implementing the JobPerformable interface. The code attribute of each of the new job item is set to the name of the relevant Spring bean.
+* To get a list of all ServicelayerJob items, run the following FlexibleSearch query in HAC
+```
+# get all service layer jobs
+SELECT {code} FROM {servicelayerjob}
+
+# get a specific service layer job (by the Java class name)
+# this query looks for a servicelayerJob item that has been created for the job "sendNewsJob.java"
+SELECT {code} FROM {servicelayerjob} WHERE {code} = 'sendNewsJob'
+```
+
+Once a ServicelayerJob item is created, you can create a cron job to wrap the ServicelayerJob, and define a trigger to that starts it.
+* A cron expression is a string comprised of 6 or 7 fields separated by white space. Fields can contain any of the allowed values, along with various combinations of allowed special characters for that field.
+
+## ServicelayerJob
+### Writing Job classes
 1. Write job in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/jobs`
 ```java
 package concerttours.jobs;
@@ -596,4 +613,24 @@ public class SendNewsJob extends AbstractJobPerformable<CronJobModel>
     <property name="newsService" ref="newsService" />
     <property name="configurationService" ref="configurationService" />
 </bean>
+```
+
+## Triggers
+### Creating triggers using Impex
+In `/hybris/bin/custom/<EXTENSION_NAME>/resources/impex`, add a file named `essentialdata-Jobs.impex`
+* must include the prefix `essentialdata` to specify that this Impex file is run on initialization
+* note that if running this Impex script in HAC, the "Enable code execution" option must be checked in the "Settings" area
+```
+# ===== EXAMPLE =====
+
+# Define the cron job and the job that it wraps
+# ===== In this example, the cronjob is named "sendNewsCronJob" and the Job class it uses is "sendNewsJob.java" =====
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;sendNewsCronJob;sendNewsJob;false;de
+ 
+# Define the trigger that periodically invokes the cron job
+# ===== In this example, the trigger is invoked once every 10 seconds =====
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+; sendNewsCronJob; 0/10 * * * * ?
 ```
