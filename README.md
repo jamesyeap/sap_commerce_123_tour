@@ -504,7 +504,7 @@ Once a ServicelayerJob item is created, you can create a cron job to wrap the Se
 * A cron expression is a string comprised of 6 or 7 fields separated by white space. Fields can contain any of the allowed values, along with various combinations of allowed special characters for that field.
 
 ## ServicelayerJob
-### Writing Job classes
+### Writing Jobs (with Java)
 1. Write job in `hybris/bin/custom/<EXTENSION_NAME>/src/<EXTENSION_NAME>/jobs`
 ```java
 package concerttours.jobs;
@@ -615,8 +615,33 @@ public class SendNewsJob extends AbstractJobPerformable<CronJobModel>
 </bean>
 ```
 
+## Writing Jobs (with Groovy)
+1. In HAC, go to the Console tab, select the Scripting Languages option, and select Groovy in the Script type drop-down menu.
+2. Enter the name of script in the **code** field above the input box.
+3. Write the script in the input box.
+```
+import de.hybris.platform.cronjob.enums.*
+import de.hybris.platform.servicelayer.cronjob.PerformResult
+import de.hybris.platform.servicelayer.search.*
+import de.hybris.platform.servicelayer.model.*
+import de.hybris.platform.catalog.enums.ArticleApprovalStatus 
+import concerttours.model.ConcertModel
+  
+searchService = spring.getBean("flexibleSearchService")
+modelService = spring.getBean("modelService")
+query = new FlexibleSearchQuery("Select {pk} from {Concert}");
+searchService.search(query).getResult().each {
+  if (it.daysUntil < 1) 
+  { 
+    it.approvalStatus = ArticleApprovalStatus.CHECK
+  }
+  modelService.saveAll()
+}
+```
+4. Click on the **Save** button.
+
 ## Triggers
-### Creating triggers using Impex
+### Creating triggers using Impex (when Job is written in Java)
 In `/hybris/bin/custom/<EXTENSION_NAME>/resources/impex`, add a file named `essentialdata-Jobs.impex`
 * must include the prefix `essentialdata` to specify that this Impex file is run on initialization
 * note that if running this Impex script in HAC, the "Enable code execution" option must be checked in the "Settings" area
@@ -633,4 +658,40 @@ INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLangu
 INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
 #% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
 ; sendNewsCronJob; 0/10 * * * * ?
+```
+
+### Creating triggers using Impex (when Job is written in Groovy)
+```
+# ===== EXAMPLE =====
+
+# Define the ScriptingJob
+INSERT_UPDATE ScriptingJob; code[unique= true ];scriptURI
+;clearoldconcertsJob;model://clearoldconcerts
+
+# Define the CronJob
+INSERT_UPDATE CronJob; code[unique= true ];job(code);sessionLanguage(isocode)
+;clearoldconcertsCronJob;clearoldconcertsJob;en
+
+# Define the trigger
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+#% afterEach: impex.getLastImportedItem().setActivationTime(new Date());
+; clearoldconcertsCronJob; 0/10 * * * * ?
+```
+
+# Backoffice
+## Adding Backoffice to SAP Commerce
+1. Add the extension to `hybris/config/localextension.xml`
+```xml
+<extension name="platformbackoffice"/> 
+```
+2. Rebuild the system
+```bash
+ant build
+```
+3. Reinitialize the system
+```bash
+ant initialize;
+
+# then, go to HAC
+# Platform > Initialization > (MAKE SURE "platformbackoffice" IS CHECKED) > Click on "Initialize"
 ```
