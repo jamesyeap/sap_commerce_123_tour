@@ -1,6 +1,6 @@
 package concerttours.events;
 
-import de.hybris.platform.servicelayer.event.events.ClusterAwareEvent;
+import de.hybris.platform.servicelayer.event.ClusterAwareEvent;
 import de.hybris.platform.servicelayer.event.events.AbstractEvent;
 
 public class BandAlbumSalesEvent extends AbstractEvent implements ClusterAwareEvent
