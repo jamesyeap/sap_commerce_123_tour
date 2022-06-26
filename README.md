@@ -695,3 +695,13 @@ ant initialize;
 # then, go to HAC
 # Platform > Initialization > (MAKE SURE "platformbackoffice" IS CHECKED) > Click on "Initialize"
 ```
+
+# Localization
+You can declare attributes and relations of item types as localized in an extension's `*-items.xml` file, and the system automatically provides for multiple values for different locales.
+* Even the type system names themselves can be localized so that when item type and attribute names appear in user interfaces, they can be in the user's chosen language.
+
+When the SAP build system encounters the localized keyword, instead of a single valued attribute, it creates a map of values keyed by language for that attribute, and generates an equivalent construct in the database.
+
+Impex has a built-in syntax for specifying values for localized values.
+
+## Localize Attribute Values with ImpEx
