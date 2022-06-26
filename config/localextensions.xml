@@ -4,5 +4,12 @@
 
     <!-- Your new extension -->
     <extension dir="../custom/concerttours"/>
+
+    <!-- Adds Backoffice -->
+    <extension name="platformbackoffice"/>
+
+    <!-- ext-template -->
+    <extension name="yempty" />
+    <extension name="yhacext" />
   </extensions>
 </hybrisconfig>
