@@ -762,3 +762,11 @@ type.Band.history.description=Kurzgeschichte über die Bande
 type.Band.albumSales.name=Albumverkauf
 type.Band.albumSales.description=Anzahl der verkauften Alben
 ```
+
+# Validation Constraints
+## Validation constraints with `items.xml` file
+
+## Validation constraints with Backoffice
+
+## Validation constraints with ImpEx
+

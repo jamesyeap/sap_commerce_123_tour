@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 26 Jun 2022, 2:32:00 PM                     ---
+ * --- Generated at 26 Jun 2022, 3:09:33 PM                     ---
  * ----------------------------------------------------------------
  */
 package concerttours.jalo;
@@ -88,11 +88,7 @@ public class Band extends GenericItem
 	 */
 	public Long getAlbumSales(final SessionContext ctx)
 	{
-		if( ctx == null || ctx.getLanguage() == null )
-		{
-			throw new JaloInvalidParameterException("Band.getAlbumSales requires a session language", 0 );
-		}
-		return (Long)getLocalizedProperty( ctx, "albumSales".intern());
+		return (Long)getProperty( ctx, "albumSales".intern());
 	}
 	
 	/**
@@ -124,38 +120,12 @@ public class Band extends GenericItem
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Band.albumSales</code> attribute. 
-	 * @return the localized albumSales - official global album sales
-	 */
-	public Map<Language,Long> getAllAlbumSales(final SessionContext ctx)
-	{
-		return (Map<Language,Long>)getAllLocalizedProperties(ctx,"albumSales".intern(),C2LManager.getInstance().getAllLanguages());
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>Band.albumSales</code> attribute. 
-	 * @return the localized albumSales - official global album sales
-	 */
-	public Map<Language,Long> getAllAlbumSales()
-	{
-		return getAllAlbumSales( getSession().getSessionContext() );
-	}
-	
-	/**
 	 * <i>Generated method</i> - Setter of the <code>Band.albumSales</code> attribute. 
 	 * @param value the albumSales - official global album sales
 	 */
 	public void setAlbumSales(final SessionContext ctx, final Long value)
 	{
-		if ( ctx == null) 
-		{
-			throw new JaloInvalidParameterException( "ctx is null", 0 );
-		}
-		if( ctx.getLanguage() == null )
-		{
-			throw new JaloInvalidParameterException("Band.setAlbumSales requires a session language", 0 );
-		}
-		setLocalizedProperty(ctx, "albumSales".intern(),value);
+		setProperty(ctx, "albumSales".intern(),value);
 	}
 	
 	/**
@@ -183,24 +153,6 @@ public class Band extends GenericItem
 	public void setAlbumSales(final long value)
 	{
 		setAlbumSales( getSession().getSessionContext(), value );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Band.albumSales</code> attribute. 
-	 * @param value the albumSales - official global album sales
-	 */
-	public void setAllAlbumSales(final SessionContext ctx, final Map<Language,Long> value)
-	{
-		setAllLocalizedProperties(ctx,"albumSales".intern(),value);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Band.albumSales</code> attribute. 
-	 * @param value the albumSales - official global album sales
-	 */
-	public void setAllAlbumSales(final Map<Language,Long> value)
-	{
-		setAllAlbumSales( getSession().getSessionContext(), value );
 	}
 	
 	/**
@@ -344,11 +296,7 @@ public class Band extends GenericItem
 	 */
 	public String getName(final SessionContext ctx)
 	{
-		if( ctx == null || ctx.getLanguage() == null )
-		{
-			throw new JaloInvalidParameterException("Band.getName requires a session language", 0 );
-		}
-		return (String)getLocalizedProperty( ctx, "name".intern());
+		return (String)getProperty( ctx, "name".intern());
 	}
 	
 	/**
@@ -361,38 +309,12 @@ public class Band extends GenericItem
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Band.name</code> attribute. 
-	 * @return the localized name - name of band
-	 */
-	public Map<Language,String> getAllName(final SessionContext ctx)
-	{
-		return (Map<Language,String>)getAllLocalizedProperties(ctx,"name".intern(),C2LManager.getInstance().getAllLanguages());
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>Band.name</code> attribute. 
-	 * @return the localized name - name of band
-	 */
-	public Map<Language,String> getAllName()
-	{
-		return getAllName( getSession().getSessionContext() );
-	}
-	
-	/**
 	 * <i>Generated method</i> - Setter of the <code>Band.name</code> attribute. 
 	 * @param value the name - name of band
 	 */
 	public void setName(final SessionContext ctx, final String value)
 	{
-		if ( ctx == null) 
-		{
-			throw new JaloInvalidParameterException( "ctx is null", 0 );
-		}
-		if( ctx.getLanguage() == null )
-		{
-			throw new JaloInvalidParameterException("Band.setName requires a session language", 0 );
-		}
-		setLocalizedProperty(ctx, "name".intern(),value);
+		setProperty(ctx, "name".intern(),value);
 	}
 	
 	/**
@@ -402,24 +324,6 @@ public class Band extends GenericItem
 	public void setName(final String value)
 	{
 		setName( getSession().getSessionContext(), value );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Band.name</code> attribute. 
-	 * @param value the name - name of band
-	 */
-	public void setAllName(final SessionContext ctx, final Map<Language,String> value)
-	{
-		setAllLocalizedProperties(ctx,"name".intern(),value);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Band.name</code> attribute. 
-	 * @param value the name - name of band
-	 */
-	public void setAllName(final Map<Language,String> value)
-	{
-		setAllName( getSession().getSessionContext(), value );
 	}
 	
 	/**
